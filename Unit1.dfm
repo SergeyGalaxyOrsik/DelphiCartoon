@@ -11,4 +11,9 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 600
+    Top = 8
+  end
 end
