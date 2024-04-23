@@ -31,6 +31,7 @@ type
     RightLegX, RightLegY: integer;
 
     procedure DrawBrucya(CenterX, CenterY:integer);
+    procedure PushUpsOnTheBar(CenterX1, CenterY1, CenterX2, CenterY2:Integer);
   public
     { Public declarations }
   end;
@@ -71,6 +72,15 @@ begin
   Canvas.LineTo(CenterX+25, CenterY);
   Canvas.MoveTo(CenterX-50, CenterY);
   Canvas.LineTo(CenterX+50, CenterY);
+end;
+
+procedure TForm1.PushUpsOnTheBar(CenterX1, CenterY1, CenterX2, CenterY2:Integer);
+begin
+  LeftArmX:=CenterX1;
+  LeftArmY:=CenterY1;
+  RightArmX:=CenterX2;
+  RightArmY:=CenterY2;
+
 end;
 
 end.
