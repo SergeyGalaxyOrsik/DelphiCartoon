@@ -20,7 +20,7 @@ object Form1: TForm1
     Height = 434
   end
   object PushingOnTheBarTimer: TTimer
-    Interval = 100
+    Interval = 30
     OnTimer = Timer1Timer
     Left = 600
     Top = 8
