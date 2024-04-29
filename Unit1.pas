@@ -51,7 +51,7 @@ implementation
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
 //  for var i := 1 to 75 do
-  if x<35 then
+  if x<30 then
   begin
     PushingDown:=True;
     PushUpsOnTheBar(150, 200, 160, 210);
@@ -60,7 +60,7 @@ begin
   begin
     PushingDown := false;
     PushUpsOnTheBar(150, 200, 160, 210);
-    if x = 70 then
+    if x = 60 then
       x:=1;
   end;
   inc(x);
@@ -161,5 +161,6 @@ begin
   DrawBrucya(CenterX2, CenterY2);
   //Invalidate;
 end;
+
 
 end.
