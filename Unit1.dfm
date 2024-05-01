@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnActivate = FormActivate
+  OnPaint = FormPaint
   TextHeight = 15
   object Screen: TImage
     Left = 8
@@ -19,10 +20,39 @@ object Form1: TForm1
     Width = 617
     Height = 434
   end
+  object Label1: TLabel
+    Left = 216
+    Top = 192
+    Width = 34
+    Height = 15
+    Caption = 'Label1'
+  end
+  object MediaPlayer1: TMediaPlayer
+    Left = 536
+    Top = 400
+    Width = 253
+    Height = 30
+    AutoEnable = False
+    Visible = False
+    TabOrder = 0
+  end
   object PushingOnTheBarTimer: TTimer
-    Interval = 30
-    OnTimer = Timer1Timer
+    Interval = 15
+    OnTimer = TimerBarTimer
     Left = 600
     Top = 8
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 45
+    OnTimer = Timer1Timer
+    Left = 528
+    Top = 272
+  end
+  object Timer2: TTimer
+    Enabled = False
+    OnTimer = Timer2Timer
+    Left = 512
+    Top = 192
   end
 end
