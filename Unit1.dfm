@@ -55,4 +55,10 @@ object Form1: TForm1
     Left = 512
     Top = 192
   end
+  object Timer3: TTimer
+    Enabled = False
+    OnTimer = Timer3Timer
+    Left = 336
+    Top = 328
+  end
 end

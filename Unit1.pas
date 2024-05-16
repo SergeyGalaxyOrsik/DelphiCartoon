@@ -15,12 +15,14 @@ type
     Timer2: TTimer;
     MediaPlayer1: TMediaPlayer;
     Label1: TLabel;
+    Timer3: TTimer;
     procedure TimerBarTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormPaint(Sender: TObject);
 
     procedure Timer1Timer(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
+    procedure Timer3Timer(Sender: TObject);
   private
     x: integer;
     PushingDown: boolean;
@@ -48,10 +50,12 @@ type
     LeftLegX, LeftLegY: integer;
     RightLegX, RightLegY: integer;
 
-     PullUpFrame: integer ;
-    PshUpFrame: integer ;
+    PullUpFrame: integer;
+    PshUpFrame: integer;
 
-    PullingUp, PushUp: boolean;
+    PullingUp, PushUp, Squat: boolean;
+    HeadX, HeadY, deltaY: integer;
+    down: boolean;
 
   end;
 
@@ -62,7 +66,7 @@ implementation
 
 {$R *.dfm}
 
-uses horizontalBar;
+uses horizontalBar, perehod;
 
 var
   ParallelBarCounter: integer = 0;
@@ -99,8 +103,8 @@ end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-//  Label1.Caption:=ExtractFilePath(ParamStr(0))+'song.mp3';
-  MediaPlayer1.FileName:=ExtractFilePath(ParamStr(0))+'song.mp3';
+  // Label1.Caption:=ExtractFilePath(ParamStr(0))+'song.mp3';
+  MediaPlayer1.FileName := ExtractFilePath(ParamStr(0)) + 'song.mp3';
   MediaPlayer1.Open;
   MediaPlayer1.Play;
   x := 1;
@@ -132,12 +136,17 @@ begin
   RightElbowX := BodyX1 + 30;
   LeftElbowY := Round((BodyY1 + BodyY2) * 0.4) + 30;
   RightElbowY := Round((BodyY1 + BodyY2) * 0.4) + 30;
+  deltaY := 0;
+  HeadX := 300;
+  HeadY := 300;
+  down := True;
+  Squat := false;
 end;
 
 procedure TForm1.FormPaint(Sender: TObject);
 begin
 
-  if Timer1.Enabled then
+  if Timer1.Enabled and PushUp then
   begin
     DrawParallelBars;
     DrawGymnast;
@@ -161,6 +170,10 @@ begin
     RightLegX := GymnastX + 20;
     RightLegY := GymnastY + 100;
     DrawPullingUp;
+  end;
+  if Timer3.Enabled and Squat then
+  begin
+    DrawSticman(HeadX, HeadY, deltaY);
   end;
 
 end;
@@ -231,8 +244,8 @@ begin
     if not PullingUp then
       InitializeGymanst;
     Timer1.Enabled := True;
-//    Timer2.Enabled := True;
-    PullingUp:=True;
+    Timer2.Enabled := false;
+    PullingUp := True;
 
   end;
 
@@ -241,7 +254,7 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
-  if i < 50 then
+  if i < 10 then
   begin
     if PullingUp then
     begin
@@ -329,17 +342,20 @@ begin
           inc(i);
         end;
       end;
-//      Invalidate;
+      // Invalidate;
 
     end;
 
   end
   else
   begin
+    Invalidate;
     Timer1.Enabled := false;
-    Timer2.Enabled := True;
-    PullingUp:=false;
-    PushUp := True;
+    Timer2.Enabled := false;
+    Timer3.Enabled :=true;
+    Squat:=true;
+    PullingUp := false;
+    PushUp := false;
   end;
 
 end;
@@ -353,20 +369,46 @@ begin
       for var k := 0 to 3 do
       begin
         Dec(GymnastY, 15);
-        Inc(LeftArmY, 15);
-        Inc(RightArmY, 15);
+        inc(LeftArmY, 15);
+        inc(RightArmY, 15);
         Dec(LeftElbowX, 15);
         Dec(RightElbowY, 15);
         Dec(LeftLegY, 15);
         Dec(RightLegY, 15);
-        Inc(PshUpFrame);
+        inc(PshUpFrame);
         Invalidate;
       end;
-      Inc(b);
+      inc(b);
     end;
+  end
+  else
+  begin
+
+    Timer1.Enabled := false;
+    Timer2.Enabled := true;
+
+    PullingUp := false;
+    PushUp := True;
   end;
 
 end;
 
+procedure TForm1.Timer3Timer(Sender: TObject);
+begin
+  if Squat then
+  begin
+    if deltaY > 60 then
+      down := false;
+    if deltaY = 0 then
+      down := True;
+
+    if down then
+      inc(deltaY)
+    else
+      Dec(deltaY);
+
+    Invalidate;
+  end;
+end;
 
 end.

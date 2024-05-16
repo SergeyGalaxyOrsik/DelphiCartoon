@@ -1,12 +1,11 @@
 program Cartoon;
-
 uses
   Vcl.Forms,
   Unit1 in 'Unit1.pas' {Form1},
-  horizontalBar in 'horizontalBar.pas';
+  horizontalBar in 'horizontalBar.pas',
+  perehod in 'perehod.pas';
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
