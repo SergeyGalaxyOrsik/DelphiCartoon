@@ -86,8 +86,8 @@ end;
 
 procedure DrawPullingUp;
 begin
-  Form1.Canvas.Pen.Color := clGreen;
-  Form1.Canvas.Brush.Color := clGreen;
+  Form1.Canvas.Pen.Color := clBlack;
+  Form1.Canvas.Brush.Color := clBlack;
 
   // Голова
   Form1.Canvas.Ellipse(Form1.GymnastX - 40, Form1.GymnastY - 100, Form1.GymnastX + 40, Form1.GymnastY - 20);

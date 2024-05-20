@@ -16,16 +16,9 @@ object Form1: TForm1
   TextHeight = 15
   object Screen: TImage
     Left = 8
-    Top = 0
+    Top = -4
     Width = 617
     Height = 434
-  end
-  object Label1: TLabel
-    Left = 216
-    Top = 192
-    Width = 34
-    Height = 15
-    Caption = 'Label1'
   end
   object MediaPlayer1: TMediaPlayer
     Left = 536
@@ -39,8 +32,8 @@ object Form1: TForm1
   object PushingOnTheBarTimer: TTimer
     Interval = 15
     OnTimer = TimerBarTimer
-    Left = 600
-    Top = 8
+    Left = 496
+    Top = 32
   end
   object Timer1: TTimer
     Enabled = False
@@ -51,12 +44,14 @@ object Form1: TForm1
   end
   object Timer2: TTimer
     Enabled = False
+    Interval = 100
     OnTimer = Timer2Timer
     Left = 512
     Top = 192
   end
   object Timer3: TTimer
     Enabled = False
+    Interval = 10
     OnTimer = Timer3Timer
     Left = 336
     Top = 328

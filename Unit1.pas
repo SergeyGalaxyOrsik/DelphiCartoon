@@ -1,4 +1,4 @@
-unit Unit1;
+п»їunit Unit1;
 
 interface
 
@@ -14,11 +14,10 @@ type
     Timer1: TTimer;
     Timer2: TTimer;
     MediaPlayer1: TMediaPlayer;
-    Label1: TLabel;
     Timer3: TTimer;
-    procedure TimerBarTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormPaint(Sender: TObject);
+    procedure TimerBarTimer(Sender: TObject);
 
     procedure Timer1Timer(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
@@ -72,6 +71,7 @@ var
   ParallelBarCounter: integer = 0;
   PullUpFrame: integer = 0;
   PshUpFrame: integer = 0;
+  SquatsCount: integer = 0;
 
 procedure TForm1.TimerBarTimer(Sender: TObject);
 begin
@@ -146,15 +146,15 @@ end;
 procedure TForm1.FormPaint(Sender: TObject);
 begin
 
-  if Timer1.Enabled and PushUp then
+  if Timer1.Enabled then
   begin
     DrawParallelBars;
     DrawGymnast;
   end;
   if Timer2.Enabled then
   begin
-    GymnastX := ClientWidth div 2; // Располагаем в центре
-    GymnastY := (ClientHeight - 200) - 60; // Располагаем в центре
+    GymnastX := ClientWidth div 2; // ГђГ Г±ГЇГ®Г«Г ГЈГ ГҐГ¬ Гў Г¶ГҐГ­ГІГ°ГҐ
+    GymnastY := (ClientHeight - 200) - 60; // ГђГ Г±ГЇГ®Г«Г ГЈГ ГҐГ¬ Гў Г¶ГҐГ­ГІГ°ГҐ
     LeftArmX := GymnastX - 20;
     LeftArmY := GymnastY - 20;
     RightArmX := GymnastX + 20;
@@ -171,7 +171,7 @@ begin
     RightLegY := GymnastY + 100;
     DrawPullingUp;
   end;
-  if Timer3.Enabled and Squat then
+  if Timer3.Enabled then
   begin
     DrawSticman(HeadX, HeadY, deltaY);
   end;
@@ -190,7 +190,7 @@ begin
   // GymnastHeadX2 := CenterX2 + 70;
   // GymnastHeadY1 := CenterY1 - 70;
   // GymnastHeadY2 := CenterY2 + 70;
-  if (ParallelBarCounter < 30 * 5) then
+  if (ParallelBarCounter < 30 * 3) then
   begin
     if PushingDown then
     begin
@@ -243,8 +243,10 @@ begin
   begin
     if not PullingUp then
       InitializeGymanst;
+    PushUp := false;
     Timer1.Enabled := True;
     Timer2.Enabled := false;
+    PushingOnTheBarTimer.Enabled := false;
     PullingUp := True;
 
   end;
@@ -254,108 +256,113 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
-  if i < 10 then
+  if i < 5 then
   begin
-    if PullingUp then
-    begin
-      case PullUpFrame of
-        0:
-          begin
-
-            inc(PullUpFrame);
-          end;
-        1:
-          begin
-            Dec(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            Dec(LeftLegY, 20);
-            Dec(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        2:
-          begin
-            Dec(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            Dec(LeftLegY, 20);
-            Dec(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        3:
-          begin
-            Dec(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            Dec(LeftLegY, 20);
-            Dec(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        4:
-          begin
-            Dec(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            Dec(LeftLegY, 20);
-            Dec(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        5:
-          begin
-            inc(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            inc(LeftLegY, 20);
-            inc(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        6:
-          begin
-            inc(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            inc(LeftLegY, 20);
-            inc(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        7:
-          begin
-            inc(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            inc(LeftLegY, 20);
-            inc(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-        8:
-          begin
-            inc(GymnastY, 20);
-            // Inc(LeftArmY, 20);
-            // Inc(RightArmY, 20);
-            inc(LeftLegY, 20);
-            inc(RightLegY, 20);
-            inc(PullUpFrame);
-          end;
-      else
+    // if PullingUp then
+    // begin
+    case PullUpFrame of
+      0:
         begin
-          PullUpFrame := 0;
-          inc(i);
-        end;
-      end;
-      // Invalidate;
 
+          inc(PullUpFrame);
+        end;
+      1:
+        begin
+          Dec(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          Dec(LeftLegY, 20);
+          Dec(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      2:
+        begin
+          Dec(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          Dec(LeftLegY, 20);
+          Dec(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      3:
+        begin
+          Dec(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          Dec(LeftLegY, 20);
+          Dec(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      4:
+        begin
+          Dec(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          Dec(LeftLegY, 20);
+          Dec(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      5:
+        begin
+          inc(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          inc(LeftLegY, 20);
+          inc(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      6:
+        begin
+          inc(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          inc(LeftLegY, 20);
+          inc(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      7:
+        begin
+          inc(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          inc(LeftLegY, 20);
+          inc(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+      8:
+        begin
+          inc(GymnastY, 20);
+          // Inc(LeftArmY, 20);
+          // Inc(RightArmY, 20);
+          inc(LeftLegY, 20);
+          inc(RightLegY, 20);
+          inc(PullUpFrame);
+        end;
+
+    else
+      begin
+        Invalidate;
+        PullUpFrame := 0;
+        inc(i);
+      end;
     end;
+    Invalidate;
 
   end
   else
   begin
-    Invalidate;
+
     Timer1.Enabled := false;
-    Timer2.Enabled := false;
-    Timer3.Enabled :=true;
-    Squat:=true;
+    // Timer2.Enabled := True;
     PullingUp := false;
-    PushUp := false;
+    // PushUp := True;
+    Timer2.Enabled := false;
+    Invalidate;
+    // Canvas.Brush.Color	 := clWhite;
+    // Screen.Canvas.FillRect(Rect(0,0,Screen.Width, Screen.Height	))    ;
+    Timer3.Enabled := True;
+    Squat := True;
+
   end;
 
 end;
@@ -380,25 +387,19 @@ begin
       end;
       inc(b);
     end;
-  end
-  else
-  begin
-
-    Timer1.Enabled := false;
-    Timer2.Enabled := true;
-
-    PullingUp := false;
-    PushUp := True;
   end;
 
 end;
 
 procedure TForm1.Timer3Timer(Sender: TObject);
 begin
-  if Squat then
+  if Squat and (SquatsCount < 10) then
   begin
     if deltaY > 60 then
+    begin
       down := false;
+      inc(SquatsCount);
+    end;
     if deltaY = 0 then
       down := True;
 
