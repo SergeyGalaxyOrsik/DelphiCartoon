@@ -104,6 +104,7 @@
         </DCCReference>
         <DCCReference Include="horizontalBar.pas"/>
         <DCCReference Include="perehod.pas"/>
+        <DCCReference Include="background.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -15,10 +15,11 @@ object Form1: TForm1
   OnPaint = FormPaint
   TextHeight = 15
   object Screen: TImage
-    Left = 8
-    Top = -4
-    Width = 617
-    Height = 434
+    Left = 0
+    Top = 0
+    Width = 625
+    Height = 430
+    Transparent = True
   end
   object MediaPlayer1: TMediaPlayer
     Left = 536
@@ -30,7 +31,7 @@ object Form1: TForm1
     TabOrder = 0
   end
   object PushingOnTheBarTimer: TTimer
-    Interval = 15
+    Interval = 30
     OnTimer = TimerBarTimer
     Left = 496
     Top = 32
@@ -44,7 +45,7 @@ object Form1: TForm1
   end
   object Timer2: TTimer
     Enabled = False
-    Interval = 100
+    Interval = 45
     OnTimer = Timer2Timer
     Left = 512
     Top = 192
@@ -55,5 +56,19 @@ object Form1: TForm1
     OnTimer = Timer3Timer
     Left = 336
     Top = 328
+  end
+  object Timer4: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer4Timer
+    Left = 304
+    Top = 184
+  end
+  object Timer5: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer5Timer
+    Left = 456
+    Top = 344
   end
 end

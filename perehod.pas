@@ -14,7 +14,7 @@ uses Unit1,Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
 Procedure DrawSticman(X, Y: integer; delta: integer);
 begin
 
-  Form1.Canvas.Pen.Width := 3;
+  Form1.Canvas.Pen.Width := 10;
 
   // тело
   Form1.Canvas.MoveTo(X, Y + delta);
@@ -31,8 +31,9 @@ begin
   Form1.Canvas.MoveTo(X - 120, Y - 40 + delta);
   Form1.Canvas.LineTo(X + 120, Y - 40 + delta);
 
-  Form1.Canvas.Pen.Width := 3;
+  Form1.Canvas.Pen.Width := 10;
   Form1.Canvas.Pen.Color := clblack;
+  Form1.Canvas.Brush.Color := clblack;
   // правая рука
   Form1.Canvas.MoveTo(X, Y + 75 + delta);
   Form1.Canvas.LineTo(X + 100, Y - 40 + delta);
